@@ -1,0 +1,25 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>Просмотр товара по типу</title>
+</head>
+<body>
+<form method="get" action="/auth/print">
+    <p>Выберите тип товара</p>
+    <p>
+        <input type="radio" id="contactChoice1"
+               name="contact" value="desktop" checked>
+        <label for="contactChoice1">Настольный компьютер</label>
+        <input type="radio" id="contactChoice2"
+               name="contact" value="notebook">
+        <label for="contactChoice2">Ноутбук</label>
+        <input type="radio" id="contactChoice3"
+               name="contact" value="hard">
+        <label for="contactChoice3">Жёсткий диск</label>
+        <input type="radio" id="contactChoice4" name="contact" value="monitor">
+        <label for="contactChoice4">Монитор</label>
+    </p>
+    <p><input type="submit" value="Найти"></p>
+</form>
+</body>
+</html>
