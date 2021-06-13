@@ -21,9 +21,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 //Доступ разрешен всем пользователей
-                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/auth/**").authenticated()
                 //Все остальные страницы требуют аутентификации
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
                 //Настройка для входа в систему
                 .formLogin()
