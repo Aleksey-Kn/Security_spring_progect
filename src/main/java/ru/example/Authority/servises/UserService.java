@@ -1,6 +1,5 @@
 package ru.example.Authority.servises;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,7 +16,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if(username.equals("admin")){
-            return new User("owner", bCryptPasswordEncoder.encode("admin"));
+            return new User(bCryptPasswordEncoder.encode("owner"), "admin");
         } else return null;
     }
 }
