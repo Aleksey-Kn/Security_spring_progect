@@ -1,5 +1,6 @@
 package ru.example.Authority;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.stereotype.Component;
@@ -171,5 +172,27 @@ public class DataBaseAssistant {
                             rs.getInt(6)));
         }
         return null;
+    }
+
+    public boolean addUser(String name, String pass){
+        try {
+            if(jdbcTemplate.query("SELECT password, username  FROM user where username = ?", (rs, rowNum) ->
+                    new User(rs.getString(1), rs.getString(2), List.of(new Role("ROLE_USER"))), name).isEmpty()) {
+                jdbcTemplate.update("INSERT INTO user(username, password)" +
+                        " VALUES(?, ?)", name, pass);
+                return true;
+            }
+            return false;
+        } catch (DataAccessException ignore){
+            return false;
+        }
+    }
+
+    public User getUser(String username){
+        List<User> users = jdbcTemplate.query("SELECT password, username FROM user WHERE username = ?", (rs, rowNum) ->
+                new User(rs.getString(1), rs.getString(2), List.of(new Role("ROLE_USER"))), username);
+        if(users.isEmpty()){
+            return null;
+        } else return users.get(0);
     }
 }

@@ -9,15 +9,17 @@ import java.util.List;
 public class User implements UserDetails {
     private final String password;
     private final String username;
+    private final List<Role> roles;
 
-    public User(String password, String username) {
+    public User(String password, String username, List<Role> roles) {
         this.password = password;
         this.username = username;
+        this.roles = roles;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of((GrantedAuthority) () -> "ADMIN");
+        return roles;
     }
 
     @Override

@@ -12,7 +12,7 @@ public class DownloadController{
     @Autowired
     DataBaseAssistant dataBaseAssistant;
 
-    @GetMapping(path = "/auth/download")
+    @GetMapping(path = "/user/download")
     public @ResponseBody String download(@RequestParam("contact") String concat,
                                          @RequestParam("id") int id){
         try {

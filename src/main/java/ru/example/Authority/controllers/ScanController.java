@@ -15,7 +15,7 @@ public class ScanController {
     @Autowired
     DataBaseAssistant dataBaseAssistant;
 
-    @GetMapping(path = "/auth/print")
+    @GetMapping(path = "/user/print")
     public @ResponseBody String download(@RequestParam("contact") String concat){
         List<Data> data = dataBaseAssistant.getAll(concat);
         StringBuilder result = new StringBuilder();
