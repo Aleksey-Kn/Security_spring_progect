@@ -24,8 +24,8 @@ public class PostController {
                                               @RequestParam("counter") int counter,
                                               @RequestParam("formFactor") String formFactor){
         if(databaseAssistant.add(new Desktop(seriesNumber, maker, price, counter, formFactor))){
-            return "Successful";
-        } else return "Error in upload";
+            return "Successful".concat("<p><a href=\"http://localhost:8080\">На главную</a></p>");
+        } else return "Error in upload".concat("<p><a href=\"http://localhost:8080\">На главную</a></p>");
     }
 
     @PostMapping(path = "/auth/uploadNotebook")
@@ -35,8 +35,8 @@ public class PostController {
                                                @RequestParam("counter") int counter,
                                                @RequestParam("size") int size){
         if(databaseAssistant.add(new Notebook(seriesNumber, maker, price, counter, size))){
-            return "Successful";
-        } else return "Error in upload";
+            return "Successful".concat("<p><a href=\"http://localhost:8080\">На главную</a></p>");
+        } else return "Error in upload".concat("<p><a href=\"http://localhost:8080\">На главную</a></p>");
     }
 
     @PostMapping(path = "/auth/uploadHardDisk")
@@ -46,8 +46,8 @@ public class PostController {
                                                @RequestParam("counter") int counter,
                                                @RequestParam("volume") int volume){
         if(databaseAssistant.add(new HardDisk(seriesNumber, maker, price, counter, volume))){
-            return "Successful";
-        } else return "Error in upload";
+            return "Successful".concat("<p><a href=\"http://localhost:8080\">На главную</a></p>");
+        } else return "Error in upload".concat("<p><a href=\"http://localhost:8080\">На главную</a></p>");
     }
 
     @PostMapping(path = "/auth/uploadMonitor")
@@ -57,7 +57,7 @@ public class PostController {
                                                @RequestParam("counter") int counter,
                                                @RequestParam("diagonal") int diagonal){
         if(databaseAssistant.add(new Monitor(seriesNumber, maker, price, counter, diagonal))){
-            return "Successful";
-        } else return "Error in upload";
+            return "Successful".concat("<p><a href=\"http://localhost:8080\">На главную</a></p>");
+        } else return "Error in upload".concat("<p><a href=\"http://localhost:8080\">На главную</a></p>");
     }
 }

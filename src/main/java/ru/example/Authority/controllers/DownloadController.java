@@ -16,9 +16,10 @@ public class DownloadController{
     public @ResponseBody String download(@RequestParam("contact") String concat,
                                          @RequestParam("id") int id){
         try {
-            return dataBaseAssistant.searchId(concat, id).toString();
+            return dataBaseAssistant.searchId(concat, id).toString()
+                    .concat("<p><a href=\"http://localhost:8080\">На главную</a></p>");
         } catch (IndexOutOfBoundsException e){
-            return "Incorrect data";
+            return "Incorrect data".concat("<p><a href=\"http://localhost:8080\">На главную</a></p>");
         }
     }
 }
