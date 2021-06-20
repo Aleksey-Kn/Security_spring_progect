@@ -20,6 +20,7 @@ public class ScanController {
         List<Data> data = dataBaseAssistant.getAll(concat);
         StringBuilder result = new StringBuilder();
         data.forEach(o -> result.append(o.toString()).append("<br>"));
+        result.append("<p><a href=\"http://localhost:8080\">На главную</a></p>");
         return result.toString();
     }
 }

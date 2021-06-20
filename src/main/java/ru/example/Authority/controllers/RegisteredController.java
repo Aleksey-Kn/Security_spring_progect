@@ -2,12 +2,12 @@ package ru.example.Authority.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import ru.example.Authority.DataBaseAssistant;
 
-@RestController
+@Controller
 public class RegisteredController {
     @Autowired
     DataBaseAssistant dataBaseAssistant;
@@ -22,7 +22,7 @@ public class RegisteredController {
         if(!username.equals("admin")
                 && confirm.equals(password)
                 && dataBaseAssistant.addUser(username, bCryptPasswordEncoder.encode(password))){
-            return "Successful";
-        } else return "Error";
+            return "index";
+        } else return "forRegistration";
     }
 }
