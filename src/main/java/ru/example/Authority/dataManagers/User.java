@@ -1,21 +1,19 @@
 package ru.example.Authority.dataManagers;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.Collection;
 import java.util.List;
 
+@Validated
+@RequiredArgsConstructor
 public class User implements UserDetails {
     private final String username;
     private final String password;
     private final List<Role> roles;
-
-    public User(String username, String password, List<Role> roles) {
-        this.password = password;
-        this.username = username;
-        this.roles = roles;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
