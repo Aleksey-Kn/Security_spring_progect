@@ -23,7 +23,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if(username.equals("admin")){
-            return new User(bCryptPasswordEncoder.encode("owner"), "admin",
+            return new User("admin", bCryptPasswordEncoder.encode("owner"),
                     List.of(new Role("ROLE_ADMIN"), new Role("ROLE_USER")));
         } else return dataBaseAssistant.getUser(username);
     }

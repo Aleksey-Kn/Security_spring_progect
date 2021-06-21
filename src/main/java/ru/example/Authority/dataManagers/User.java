@@ -7,11 +7,11 @@ import java.util.Collection;
 import java.util.List;
 
 public class User implements UserDetails {
-    private final String password;
     private final String username;
+    private final String password;
     private final List<Role> roles;
 
-    public User(String password, String username, List<Role> roles) {
+    public User(String username, String password, List<Role> roles) {
         this.password = password;
         this.username = username;
         this.roles = roles;

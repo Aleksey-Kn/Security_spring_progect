@@ -177,7 +177,7 @@ public class DataBaseAssistant {
     public boolean addUser(String name, String pass){
         try {
             if(jdbcTemplate.query("SELECT password, username  FROM user where username = ?", (rs, rowNum) ->
-                    new User(rs.getString(1), rs.getString(2), List.of(new Role("ROLE_USER"))), name).isEmpty()) {
+                    new User(rs.getString(2), rs.getString(1), List.of(new Role("ROLE_USER"))), name).isEmpty()) {
                 jdbcTemplate.update("INSERT INTO user(username, password)" +
                         " VALUES(?, ?)", name, pass);
                 return true;
@@ -190,7 +190,7 @@ public class DataBaseAssistant {
 
     public User getUser(String username){
         List<User> users = jdbcTemplate.query("SELECT password, username FROM user WHERE username = ?", (rs, rowNum) ->
-                new User(rs.getString(1), rs.getString(2), List.of(new Role("ROLE_USER"))), username);
+                new User(rs.getString(2), rs.getString(1), List.of(new Role("ROLE_USER"))), username);
         if(users.isEmpty()){
             return null;
         } else return users.get(0);
