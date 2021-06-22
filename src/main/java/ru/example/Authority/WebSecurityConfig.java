@@ -8,6 +8,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import ru.example.Authority.servises.CustomHttp403ForbiddenEntryPoint;
+import ru.example.Authority.servises.DeniedHandler;
+import ru.example.Authority.servises.RestAuthenticationFailureHandler;
 import ru.example.Authority.servises.UserService;
 
 @Configuration
@@ -17,9 +20,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     UserService userService;
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+    BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Autowired
+    CustomHttp403ForbiddenEntryPoint customHttp403ForbiddenEntryPoint;
+
+    @Autowired
+    RestAuthenticationFailureHandler failureHandler;
+
+    @Autowired
+    DeniedHandler deniedHandler;
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -33,14 +45,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 //Настройка для входа в систему
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/login").failureHandler(failureHandler)
                 //Перенарпавление на главную страницу после успешного входа
                 .defaultSuccessUrl("/")
                 .permitAll()
                 .and()
                 .logout()
                 .permitAll()
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/")
+                .and().exceptionHandling().authenticationEntryPoint(customHttp403ForbiddenEntryPoint)
+                .and().exceptionHandling().accessDeniedHandler(deniedHandler);
     }
 
     @Autowired
